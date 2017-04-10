@@ -1,0 +1,19 @@
+{
+  "name": "d3-for-ga",
+  "version": "1.0.0",
+  "description": "Drawing charts for FTC data in Google Analytics by d3",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangyichen1064431086/d3ForGa.git"
+  },
+  "author": "Yichen Wang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wangyichen1064431086/d3ForGa/issues"
+  },
+  "homepage": "https://github.com/wangyichen1064431086/d3ForGa#readme"
+}
