@@ -15,5 +15,19 @@
   "bugs": {
     "url": "https://github.com/wangyichen1064431086/d3ForGa/issues"
   },
-  "homepage": "https://github.com/wangyichen1064431086/d3ForGa#readme"
+  "homepage": "https://github.com/wangyichen1064431086/d3ForGa#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.8",
+    "fs-jetpack": "^0.13.3",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-changed": "^2.0.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "nunjucks": "^3.0.0",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  }
 }
