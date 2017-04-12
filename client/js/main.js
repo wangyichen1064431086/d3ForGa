@@ -33,8 +33,9 @@ const y = d3.scaleLinear()
     .scale(x)
     .orient("bottom");
  */
-const xAxis = d3.axisBottom()
-    .scale(x);
+const xAxis = d3.axisBottom(x);
+
+
 
 
 /** 3.x版写法
@@ -42,14 +43,8 @@ const xAxis = d3.axisBottom()
     .scale(y)
     .orient("left");
  */
-const yAxis = d3.axisLeft()
-    .scale(y);
+const yAxis = d3.axisLeft(y);
 
-const chart = d3.select(".chart")
-    .attr("width",width + margin.left + margin.right)
-    .attr("height",height + margin.top + margin.bottom)
-  .append("g")  
-    .attr("transform", "translate("+margin.left+","+margin.top+")");
 
 /** 3.x版本写法：
    * var line = d3.svg.line()//4.0中直接是d3.line()
@@ -62,57 +57,50 @@ const chart = d3.select(".chart")
    */
 const line = d3.line()//4.0中直接是d3.line()
     .x(d => x(d.date))
-    .y(d => y(d.clickFromRecommends));
+    .y(d => y(d.clickFromRecommends)); 
 
-d3.tsv("dataForDraw/storyRecommendData.tsv", type, function(error,data) {
+const chart = d3.select(".chart")
+    .attr("width",width + margin.left + margin.right)
+    .attr("height",height + margin.top + margin.bottom)
+  .append("g")  
+    .attr("transform", "translate("+margin.left+","+margin.top+")");
+
+
+
+d3.tsv("dataForDraw/storyRecommendData.tsv", type, (error,data) => {
   //在4.x版中d3.tsv属于d3-request
   console.log(data);
-  
-  x.domain([new Date(2017,3,4), new Date(2017,3,9)])
-    .ticks(6);
-  y.domain([0,d3.max(data,function(d) {
+  console.log(data.length);
+  x.domain(d3.extent(data, d => d.date));//d.date必须是数值或time，timeParse后得到的是time，而timeFormat后得到的是string
+  y.domain([0,d3.max(data, (d) => {
     return d.clickFromRecommends;
   })]);
   
 
-
+  
   chart.append("g")
     .attr("class","x axis")
     .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
+    .call(xAxis.ticks(d3.timeDay));
   
   chart.append("g")
     .attr("class", "y axis")
     .call(yAxis);
 
-/*
-  chart.selectAll("circle")
-      .data(data)
-    .enter().append("circle")
-      .attr("cy",function(d) {
-        return y(d.clickFromRecommends);
-      })
-      .attr("cx",function(d,i) {
-        return x(d.date);
-      })
-      .attr("r",5)
-      .style("fill","steelblue");
-*/
-  
-    
-
-  chart.append('g').append('path')
+  chart.append('path')
     .datum(data)
-    .attr('d', function(d) {
-      return line(d);
-    })
+    .attr('d', line)
     .attr('fill','none')
-    .attr('stroke','steelblue');
+    .attr('stroke','steelblue')
+    .attr('storke-linejoin','round')
+    .attr('stroke-width','2');
 });
 
 
 function type(d) {
-  //d.date = parseTime(d.date);
+  const parse = d3.timeParse('%m%d');
+  //const format = d3.timeFormat('%m-%d');
+  d.date = parse(d.date);
   d.clickFromRecommends = +d.clickFromRecommends;
   return d;
 }
