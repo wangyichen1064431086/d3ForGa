@@ -103,4 +103,5 @@ gulp.task('serve',gulp.parallel('html','style','script','helloGa',function() {
   gulp.watch('client/styles/*.scss',gulp.parallel('style'));
   gulp.watch('client/js/*.js',gulp.parallel('script'));
   gulp.watch(['views/*.html','data/dataForRender/*.json'],gulp.parallel('html'));
+  gulp.watch('gaRelated/*.html',gulp.parallel('helloGa'));
 }))

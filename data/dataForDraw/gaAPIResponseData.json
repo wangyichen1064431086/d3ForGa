@@ -1,0 +1,787 @@
+{
+  "reports": [
+    {
+      "columnHeader": {
+        "dimensions": [
+          "ga:eventCategory",
+          "ga:eventAction",
+          "ga:date"
+        ],
+        "metricHeader": {
+          "metricHeaderEntries": [
+            {
+              "name": "ga:totalEvents",
+              "type": "INTEGER"
+            }
+          ]
+        }
+      },
+      "data": {
+        "rows": [
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_recommends",
+              "20170401"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1052"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_recommends",
+              "20170402"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1121"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_recommends",
+              "20170403"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1711"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_recommends",
+              "20170404"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1662"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_recommends",
+              "20170405"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1993"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_recommends",
+              "20170406"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "2091"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_recommends",
+              "20170407"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1792"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_recommends",
+              "20170408"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "973"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_recommends",
+              "20170409"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "763"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_recommends",
+              "20170410"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1268"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_recommends",
+              "20170411"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1477"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_recommends",
+              "20170412"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1471"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_relatives",
+              "20170401"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1031"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_relatives",
+              "20170402"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "882"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_relatives",
+              "20170403"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1373"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_relatives",
+              "20170404"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1028"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_relatives",
+              "20170405"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1254"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_relatives",
+              "20170406"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1813"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_relatives",
+              "20170407"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1733"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_relatives",
+              "20170408"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "781"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_relatives",
+              "20170409"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "620"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_relatives",
+              "20170410"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1100"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_relatives",
+              "20170411"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1400"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "In Story Recommend",
+              "Click-002from_relatives",
+              "20170412"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "1665"
+                ]
+              }
+            ]
+          }
+        ],
+        "totals": [
+          {
+            "values": [
+              "32054"
+            ]
+          }
+        ],
+        "rowCount": 24,
+        "minimums": [
+          {
+            "values": [
+              "620"
+            ]
+          }
+        ],
+        "maximums": [
+          {
+            "values": [
+              "2091"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "columnHeader": {
+        "dimensions": [
+          "ga:eventCategory",
+          "ga:eventAction",
+          "ga:eventLabel",
+          "ga:date"
+        ],
+        "metricHeader": {
+          "metricHeaderEntries": [
+            {
+              "name": "ga:totalEvents",
+              "type": "INTEGER"
+            }
+          ]
+        }
+      },
+      "data": {
+        "rows": [
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_recommends",
+              "20170401"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "97347"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_recommends",
+              "20170402"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "91199"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_recommends",
+              "20170403"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "124183"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_recommends",
+              "20170404"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "91199"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_recommends",
+              "20170405"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "127944"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_recommends",
+              "20170406"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "149697"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_recommends",
+              "20170407"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "127346"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_recommends",
+              "20170408"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "65569"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_recommends",
+              "20170409"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "50983"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_recommends",
+              "20170410"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "112050"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_recommends",
+              "20170411"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "116957"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_recommends",
+              "20170412"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "137928"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_relatives",
+              "20170401"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "92576"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_relatives",
+              "20170402"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "88613"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_relatives",
+              "20170403"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "119163"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_relatives",
+              "20170404"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "86538"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_relatives",
+              "20170405"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "125127"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_relatives",
+              "20170406"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "147148"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_relatives",
+              "20170407"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "125320"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_relatives",
+              "20170408"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "63777"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_relatives",
+              "20170409"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "49735"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_relatives",
+              "20170410"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "110830"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_relatives",
+              "20170411"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "117437"
+                ]
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              "story",
+              "In View",
+              "from_relatives",
+              "20170412"
+            ],
+            "metrics": [
+              {
+                "values": [
+                  "137329"
+                ]
+              }
+            ]
+          }
+        ],
+        "totals": [
+          {
+            "values": [
+              "2555995"
+            ]
+          }
+        ],
+        "rowCount": 24,
+        "minimums": [
+          {
+            "values": [
+              "49735"
+            ]
+          }
+        ],
+        "maximums": [
+          {
+            "values": [
+              "149697"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

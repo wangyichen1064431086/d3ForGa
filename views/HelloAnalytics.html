@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Hello Analytics Reporting API V4</title>
-  <meta name="google-signin-client_id" content="166811704494-d8tthgqdg7fs56ou745c8br1cp2a4gqi.apps.googleusercontent.com">
-  <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
-</head>
-<body>
-
 <h1>Hello Analytics Reporting API V4</h1>
 
 <p>
@@ -21,7 +11,15 @@
 <script>
   // Replace with your view ID.
   var VIEW_ID = '10995661';
-
+  /*
+  var gaData = {
+    date:[],
+    clickFromRecommends:[],
+    clickFromRelatives:[],
+    inViewFromRecommends:[],
+    inViewFromRelatives:[]
+  }
+  */
   // Query the API and print the results to the page.
   function queryReports() {
     gapi.client.request({
@@ -38,8 +36,8 @@
             viewId: VIEW_ID,//有效数据视图ID
             dateRanges: [//该字段至少有一个有效条目,默认为{"startDate": "7daysAgo", "endDate": "yesterday"}
               {
-                startDate: '2017-04-01',
-                endDate: '2017-04-12'
+                startDate: '2017-04-01',//'2017-04-01',
+                endDate: '2017-04-12',//'2017-04-01'
               }
             ],
             metrics: [//该字段中至少有一个有效条目
@@ -139,7 +137,54 @@
   }
 
   function displayResults(response) {
-    var formattedJson = JSON.stringify(response.result, null, 2);
+    var gaData = {
+      dates:[],
+      clickFromRecommends:[],
+      clickFromRelatives:[],
+      inViewFromRecommends:[],
+      inViewFromRelatives:[]
+    }
+    /*
+    var dates = [], 
+        clickFromRecommends = [], 
+        clickFromRelatives = [], 
+        inViewFromRecommends = [], 
+        inViewFromRelatives = [];
+    */
+    var clickDatas = response.result.reports[0].data.rows;
+    for(var i = 0,len = clickDatas.length;i<len;i++) {
+      var clickData = clickDatas[i];
+      /** clickData长这样：
+          {
+              "dimensions": [
+                "In Story Recommend",
+                "Click-002from_recommends",
+                "20170401"
+              ],
+              "metrics": [
+                {
+                  "values": [
+                    "1052"
+                  ]
+                }
+              ]
+          }
+       */
+      var date = clickData.dimensions[2];
+      var value = clickData.metrics[0].values[0];
+      if(dates.indexOf(date) < 0) {
+        gaData.dates.push(date);
+      }
+      if(clickData.dimensions[1] === 'Click-002from_recommends') {
+        gaData.clickFromRecommends.push(value);
+      } else if(clickData.dimensions[1] === 'Click-002from_relatives') {
+        gaData.clickFromRelatives.push(value);
+      }
+    }
+
+    
+    //var formattedJson = JSON.stringify(response.result, null, 2);
+    var formattedJson = JSON.stringify(gaData);
     document.getElementById('query-output').value = formattedJson;
   }
 </script>
@@ -147,5 +192,4 @@
 <!-- Load the JavaScript API client and Sign-in library. -->
 <script src="https://apis.google.com/js/client:platform.js"></script>
 
-</body>
-</html>
+
