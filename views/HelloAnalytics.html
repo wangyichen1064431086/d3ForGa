@@ -137,53 +137,106 @@
   }
 
   function displayResults(response) {
-    var gaData = {
-      dates:[],
-      clickFromRecommends:[],
-      clickFromRelatives:[],
-      inViewFromRecommends:[],
-      inViewFromRelatives:[]
-    }
     /*
-    var dates = [], 
-        clickFromRecommends = [], 
-        clickFromRelatives = [], 
-        inViewFromRecommends = [], 
-        inViewFromRelatives = [];
+      var gaData = {
+        dates:[],
+        clickFromRecommends:[],
+        clickFromRelatives:[],
+        inViewFromRecommends:[],
+        inViewFromRelatives:[]
+      };
     */
-    var clickDatas = response.result.reports[0].data.rows;
-    for(var i = 0,len = clickDatas.length;i<len;i++) {
-      var clickData = clickDatas[i];
-      /** clickData长这样：
-          {
-              "dimensions": [
-                "In Story Recommend",
-                "Click-002from_recommends",
-                "20170401"
-              ],
-              "metrics": [
-                {
-                  "values": [
-                    "1052"
-                  ]
-                }
-              ]
-          }
-       */
-      var date = clickData.dimensions[2];
-      var value = clickData.metrics[0].values[0];
+    var gaData = [];
+    var clickData = response.result.reports[0].data.rows;
+    var inViewData = response.result.reports[1].data.rows;
+    var i = 0,len = 0;
+    //得到日期数组
+    var dates = [];
+    for (i = 0, len = clickData.length;i<len; i++) { //循环24次
+      var date = clickData[i].dimensions[2];
       if(dates.indexOf(date) < 0) {
-        gaData.dates.push(date);
-      }
-      if(clickData.dimensions[1] === 'Click-002from_recommends') {
-        gaData.clickFromRecommends.push(value);
-      } else if(clickData.dimensions[1] === 'Click-002from_relatives') {
-        gaData.clickFromRelatives.push(value);
+        dates.push(date);//最终dates长度为12
       }
     }
 
-    
+    //根据日期数组得到每个日期的数据对象
+    for(i = 0,len = dates.length;i<len;i++) {//循环12次
+      
+      var gaDatum = {
+        date:'',
+        clickFromRecommends:'',
+        clickFromRelatives:'',
+        inViewFromRecommends:'',
+        inViewFromRelatives:''
+      };
+      gaDatum.date = dates[i];
+
+      var j = 0, l = 0;
+
+      for(j = 0, l = clickData.length; j < l; j++ ) { //循环24次
+        var clickDatum = clickData[j];
+          /** clickDatum长这样：
+              {
+                  "dimensions": [
+                    "In Story Recommend",
+                    "Click-002from_recommends",
+                    "20170401"
+                  ],
+                  "metrics": [
+                    {
+                      "values": [
+                        "1052"
+                      ]
+                    }
+                  ]
+              }
+          */
+        if(clickDatum.dimensions[2] === dates[i]) {
+          var clickValue = clickDatum.metrics[0].values[0];
+          if(clickDatum.dimensions[1] === 'Click-002from_recommends') {
+            gaDatum.clickFromRecommends = clickValue;
+          } else if(clickDatum.dimensions[1] === 'Click-002from_relatives') {
+            gaDatum.clickFromRelatives = clickValue;
+          }
+        }
+      }
+     
+      for (j = 0,l = inViewData.length; j < l; j++) { //循环24次
+          var inViewDatum = inViewData[j];
+          /** inViewDatum长这样：
+              {
+                "dimensions": [
+                  "story",
+                  "In View",
+                  "from_recommends",
+                  "20170401"
+                ],
+                "metrics": [
+                  {
+                    "values": [
+                      "97347"
+                    ]
+                  }
+                ]
+              }
+          */
+          if(inViewDatum.dimensions[3] === dates[i]) {
+            var inViewValue = inViewDatum.metrics[0].values[0];
+            if(inViewDatum.dimensions[2] === 'from_recommends') {
+              gaDatum.inViewFromRecommends = inViewValue;
+            } else if(inViewDatum.dimensions[2] === 'from_relatives') {
+              gaDatum.inViewFromRelatives = inViewValue;
+            }
+          }
+      }  
+
+      if(gaDatum.date && gaDatum.clickFromRecommends && gaDatum.clickFromRelatives && gaDatum.inViewFromRecommends && gaDatum.inViewFromRelatives) {
+        gaData.push(gaDatum);
+      }
+    }
+
     //var formattedJson = JSON.stringify(response.result, null, 2);
+    console.log(gaData);
     var formattedJson = JSON.stringify(gaData);
     document.getElementById('query-output').value = formattedJson;
   }

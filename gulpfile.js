@@ -101,7 +101,7 @@ gulp.task('serve',gulp.parallel('html','style','script','helloGa',function() {
     port:8080//一定要和“创建凭据”的“已获授权的 JavaScript 来源”设置的端口一致
   });
   gulp.watch('client/styles/*.scss',gulp.parallel('style'));
-  gulp.watch('client/js/*.js',gulp.parallel('script'));
+  gulp.watch('client/js/**/*.js',gulp.parallel('script'));
   gulp.watch(['views/*.html','data/dataForRender/*.json'],gulp.parallel('html'));
   gulp.watch('gaRelated/*.html',gulp.parallel('helloGa'));
 }))
