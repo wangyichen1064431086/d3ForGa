@@ -26,12 +26,13 @@ class DrawLineTime {
     this.width = 0;
     this.height = 0;
     this.setSize();
-    console.log(this.margin);
+    //console.log(this.margin);
     this.chart;
 
     const yPros = lineYPro.map(x => {
       return x['yPro'];
-    })
+    });
+    //console.log(`yPros:${yPros}`);
     const scale = this.scaleFunc(data, lineXPro, yPros);//得到scale.x,scale.y
     const axis = this.axisFunc(scale.x, scale.y);//得到axis.xAxis,axis.yAxis
 
@@ -40,13 +41,15 @@ class DrawLineTime {
       const lineClickFromRelatives = this.lineFunc(date, clickFromRelatives);
     */
 
-    this.drawChart(container,this.margin,this.width,this,height);
+    this.drawChart(container,this.margin,this.width,this.height);
     this.drawAxis(this.chart, axis.xAxis, axis.yAxis);
 
     for(let i = 0, len = lineYPro.length; i < len; i++) {
       const onelineYPro = lineYPro[i];
-      const line = this.lineFunc(lineXPro, onelineYPro.yPro);
+      //console.log(`onelineYPro:${JSON.stringify(onelineYPro)}`);
+      const line = this.lineFunc(lineXPro, onelineYPro.yPro, scale.x, scale.y);
       this.drawPath(this.chart, data, line, onelineYPro.strokeColor, onelineYPro.strokeWidth);
+      //drawPath(chart,data,line,strokeColor,strokeWidth)
     }
 
 
@@ -71,21 +74,26 @@ class DrawLineTime {
      * @param
      * @param yPros
      */
+    console.log(d3.extent(data, d => {
+      console.log(`lineXpro:${lineXPro}`);
+      console.log(`d[lineXPro]:${d[lineXPro]}`);
+      return d[lineXPro];
+    }));
     const x = d3.scaleTime()
         .rangeRound([0,this.width])
-        .domain(d3.extent(data, d => d.lineXPro));
+        .domain(d3.extent(data, d => d[lineXPro]));
 
     const y = d3.scaleLinear()
         .rangeRound([this.height,0])
         .domain([0,d3.max(data, (d) => {
-          return d3.max(
-            d3.values(d)//得到d的所有key组成的数组
-              .filter(//筛选出在yPros中的key
-                (x) => {
-                  return x.indexOf(yPros) >= 0;
-                }
-          )
-          );
+          const yProsValue = [];
+          for(const prop in d) {
+            if(yPros.indexOf(prop)>=0) {
+              yProsValue.push(d[prop]);
+            }
+          }
+          console.log(`yProsValue:${yProsValue}`);
+          return d3.max(yProsValue);
         })]);
 
      return {
@@ -107,14 +115,16 @@ class DrawLineTime {
 
 
   //折线绘制函数:lineClickFromRecommends等4个
-  lineFunc(xProp, yProp) {
+  lineFunc(xProp, yProp,scalex,scaley) {
     /**
      * @param xProp：Type time, 作为x轴的数据属性，eg:date
      * @param yProp: Type number,作为y轴的数据属性，eg:clickFromRecommends
      */
+    console.log(`xProp:${xProp}`);
+    console.log(`yProp:${yProp}`);
      const line = d3.line()
-      .x(d => x(d.xProp))
-      .y(d => y(d.yProp));
+      .x(d => scalex(d[xProp]))
+      .y(d => scaley(d[yProp]));
 
      return line; 
   }
@@ -132,8 +142,8 @@ class DrawLineTime {
   drawAxis(chart, xAxis, yAxis) {
     chart.append("g")
     .attr("class","x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis.ticks(d3.timeDay));
+    .attr("transform", "translate(0," + this.height + ")")
+    .call(xAxis.ticks(d3.timeDay.every(5)));
     
     chart.append("g")
       .attr("class", "y axis")
