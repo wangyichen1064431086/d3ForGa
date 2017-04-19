@@ -1,0 +1,38 @@
+<script src="https://apis.google.com/js/api.js"></script>
+
+<script type="text/javascript">
+function handleClientLoad() {
+  // Loads the client library and the auth2 library together for efficiency.
+  // Loading the auth2 library is optional here since `gapi.client.init` function will load it if not already loaded.
+  // Loading it upfront(在前面) can save one network request.
+  gapi.load('client:auth2', initClient);
+}
+
+function initClient() {
+  // Initialize the client with API key and People API
+  // Initialize OAuth with an OAuth 2.0 client ID and scopes (space delimited string) to request access.
+  gapi.client.init({
+    apiKey:'',
+    clientId:'166811704494-d8tthgqdg7fs56ou745c8br1cp2a4gqi.apps.googleusercontent.com',//即OAuth client ID
+    scope:'https://www.googleapis.com/auth/analytics.readonly'
+  
+  }).then(function() {
+       // Listen for sign-in state changes.
+       gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus)
+       
+       // Handle the initial sign-in state.
+       updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+  })
+}
+
+function updateSigninStatus(isSignedIn) {
+  // When signin status changes, this function is called.
+  // If the signin status is changed to signedIn, we make an API call.
+  if (isSignedIn) {
+    makeApiCall();
+  }
+}
+
+function makeApiCall() {
+
+}
