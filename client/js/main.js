@@ -3,8 +3,10 @@ import dateNumManipu from './dataManipu/dateNumManipu.js';
 import {dataAdd_RateOf2Pro} from './dataManipu/dataAddCompuPro.js';
 import drawFromData from './d3Draw/drawFromData.js';
 import DrawLineTime from './d3Draw/drawLineTime.js';
+//import queryReports from './getGaData/getGaData.js';
+//document.querySelector('.g-signin2').setAttribute('data-onsuccess','queryReports');
 
-document.getElementById('startDraw').addEventListener("click",function() {
+  document.getElementById('startDraw').addEventListener("click",function() {
 
   let gaData = JSON.parse(document.getElementById('query-output').value);
   console.info(`gaData: ${gaData}`);

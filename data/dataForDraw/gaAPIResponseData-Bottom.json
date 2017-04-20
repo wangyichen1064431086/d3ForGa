@@ -1,0 +1,495 @@
+{
+    "result": {
+        "reports": [
+            {
+                "columnHeader": {
+                    "dimensions": [
+                        "ga:eventCategory",
+                        "ga:eventAction",
+                        "ga:date"
+                    ],
+                    "metricHeader": {
+                        "metricHeaderEntries": [
+                            {
+                                "name": "ga:totalEvents",
+                                "type": "INTEGER"
+                            }
+                        ]
+                    }
+                },
+                "data": {
+                    "rows": [
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170320"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "123203"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170321"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "161533"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170322"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "170788"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170323"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "149230"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170324"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "141566"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170325"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "51899"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170326"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "44662"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170327"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "146964"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170328"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "141361"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170329"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "162719"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170330"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "167638"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170331"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "145312"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170401"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "117306"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170402"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "62745"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170403"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "84795"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170404"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "72941"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170405"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "167505"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170406"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "169943"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170407"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "167955"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170408"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "77624"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170409"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "54231"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170410"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "140193"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170411"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "140343"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170412"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "157138"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170413"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "101440"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170414"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "135408"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170415"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "53808"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170416"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "44568"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170417"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "111210"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170418"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "121666"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "dimensions": [
+                                "Story Recommend",
+                                "Seen-002",
+                                "20170419"
+                            ],
+                            "metrics": [
+                                {
+                                    "values": [
+                                        "132612"
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "totals": [
+                        {
+                            "values": [
+                                "3720306"
+                            ]
+                        }
+                    ],
+                    "rowCount": 31,
+                    "minimums": [
+                        {
+                            "values": [
+                                "44568"
+                            ]
+                        }
+                    ],
+                    "maximums": [
+                        {
+                            "values": [
+                                "170788"
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "body": "{\n  \"reports\": [\n    {\n      \"columnHeader\": {\n        \"dimensions\": [\n          \"ga:eventCategory\",\n          \"ga:eventAction\",\n          \"ga:date\"\n        ],\n        \"metricHeader\": {\n          \"metricHeaderEntries\": [\n            {\n              \"name\": \"ga:totalEvents\",\n              \"type\": \"INTEGER\"\n            }\n          ]\n        }\n      },\n      \"data\": {\n        \"rows\": [\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170320\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"123203\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170321\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"161533\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170322\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"170788\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170323\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"149230\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170324\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"141566\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170325\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"51899\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170326\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"44662\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170327\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"146964\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170328\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"141361\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170329\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"162719\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170330\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"167638\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170331\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"145312\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170401\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"117306\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170402\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"62745\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170403\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"84795\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170404\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"72941\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170405\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"167505\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170406\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"169943\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170407\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"167955\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170408\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"77624\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170409\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"54231\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170410\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"140193\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170411\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"140343\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170412\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"157138\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170413\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"101440\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170414\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"135408\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170415\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"53808\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170416\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"44568\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170417\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"111210\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170418\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"121666\"\n                ]\n              }\n            ]\n          },\n          {\n            \"dimensions\": [\n              \"Story Recommend\",\n              \"Seen-002\",\n              \"20170419\"\n            ],\n            \"metrics\": [\n              {\n                \"values\": [\n                  \"132612\"\n                ]\n              }\n            ]\n          }\n        ],\n        \"totals\": [\n          {\n            \"values\": [\n              \"3720306\"\n            ]\n          }\n        ],\n        \"rowCount\": 31,\n        \"minimums\": [\n          {\n            \"values\": [\n              \"44568\"\n            ]\n          }\n        ],\n        \"maximums\": [\n          {\n            \"values\": [\n              \"170788\"\n            ]\n          }\n        ]\n      }\n    }\n  ]\n}\n",
+    "headers": {
+        "date": "Thu, 20 Apr 2017 02:41:15 GMT",
+        "content-encoding": "gzip",
+        "server": "ESF",
+        "vary": "Origin, X-Origin, Referer",
+        "content-type": "application/json; charset=UTF-8",
+        "cache-control": "private",
+        "content-length": "626"
+    },
+    "status": 200,
+    "statusText": null
+}

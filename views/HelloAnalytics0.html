@@ -3,16 +3,34 @@
 
 <p>
   <!-- The Sign-in button. This will run `queryReports()` on success. -->
-  <div class="g-signin2" data-onsuccess="queryReports"></div>
+  <div class="g-signin2"></div>
 </p>
 
+<!-- The API response Raw Data will be printed here. -->
+<h2>The Raw Data From Ga API</h2>
+<div>
+<textarea cols="80" rows="20" id="response-rawdata"></textarea>
+</div>
 <!-- The API response will be printed here. -->
+<div>
 <textarea cols="80" rows="20" id="query-output"></textarea>
+</div>
 
 <script>
   // Replace with your view ID.
   var VIEW_ID = '10995661';
-  
+  var dataRange1 =  [//该字段至少有一个有效条目,默认为{"startDate": "7daysAgo", "endDate": "yesterday"}
+    {
+      startDate: '2017-03-15',//'2017-04-01',
+      endDate: '2017-04-16',//'2017-04-01'
+    }
+  ];
+  var dataRange2 = [
+    {
+      startDate:'2017-03-20',
+      endDate:'2017-04-19'
+    }
+  ];
   // Query the API and print the results to the page.
   function queryReports() {
     gapi.client.request({
@@ -24,15 +42,19 @@
           /**构建reportRequests对象。
            * batchGet 方法最多接受五个 ReportRequest 对象。
            * 所有请求都应该有相同的 dateRange、viewId、segments、samplingLevel 和 cohortGroup。
-           */
-          {
+          */
+        
+          {/// 1.得到(Event Category)In Story Recommend  (EventAction)002click_fromRecommends|002click_fromRelatives
             viewId: VIEW_ID,//有效数据视图ID
+            /*
             dateRanges: [//该字段至少有一个有效条目,默认为{"startDate": "7daysAgo", "endDate": "yesterday"}
               {
                 startDate: '2017-03-15',//'2017-04-01',
                 endDate: '2017-04-16',//'2017-04-01'
               }
             ],
+            */
+            dateRanges:dataRange1,
             metrics: [//该字段中至少有一个有效条目
               {
                 expression: 'ga:totalEvents'
@@ -50,7 +72,7 @@
               }
             ],
             dimensionFilterClauses:[
-              {//1.得到(Event Category)In Story Recommend  (EventAction)002click_fromRecommends|002click_fromRelatives
+              {
                 filters: [ 
                   {
                     dimensionName: 'ga:eventCategory',
@@ -65,12 +87,7 @@
           },
           {/// 2.得到(Event Category)story (Event Action)In view (Event Label)from_recommends|from_relatives
             viewId: VIEW_ID,//有效数据视图ID
-            dateRanges: [//每个Request至多可以有两个dateRange,该字段至少有一个,默认为{"startDate": "7daysAgo", "endDate": "yesterday"}
-              {
-                startDate: '2017-03-15',
-                endDate: '2017-04-16'
-              }
-            ],
+            dateRanges:dataRange1,
             metrics: [//一系列定量测定方法，每个request中至少有一个测定方法，最多有10个测定方法
               {
                 expression: 'ga:totalEvents',//测定方法的表达式
@@ -124,6 +141,48 @@
             ]
            
           }
+          /*
+          {
+            viewId: VIEW_ID,//有效数据视图ID
+            dateRanges:dataRange2,
+            metrics: [//该字段中至少有一个有效条目
+              {
+                expression: 'ga:totalEvents'
+              }
+            ],
+            dimensions:[
+              {
+                name:'ga:eventCategory'
+              },
+              {
+                name:'ga:eventAction'
+              },
+              {
+                name:'ga:date'
+              }
+            ],
+            dimensionFilterClauses:[
+              {//1.得到(Event Category)In Story Recommend  (EventAction)002click_fromRecommends|002click_fromRelatives
+                operator:'AND',
+                filters: [ 
+                  {
+                    dimensionName: 'ga:eventCategory',
+                    operator: 'EXACT',//	The value should match the match expression entirely(完全匹配expressions)
+                    expressions: ['Story Recommend'],
+                    caseSensitive:true//是否区分大小写？默认为false
+                  }, 
+                  {
+                    dimensionName: 'ga:eventAction',
+                    operator: 'EXACT',//	The value should match the match expression entirely(完全匹配expressions)
+                    expressions: ['Seen-002'],
+                    caseSensitive:true//是否区分大小写？默认为false
+                  } 
+                ]
+              },
+            ]
+           
+          }
+          */
         ]
       }
     }).then(displayResults, console.error.bind(console));
@@ -139,6 +198,23 @@
         inViewFromRelatives:[]
       };
     */
+    document.getElementById('response-rawdata').value = JSON.stringify(response.result);
+    /*
+    var gaData = [];
+    var inViewData = response.result.reports[0].data.rows;
+    var dates = [];
+    for (i = 0, len = inViewData.length;i<len; i++) { //循环30次
+      var gaDatum = {
+        date:'',
+        inViewFromRecommends:'',
+      };
+      gaDatum.date = inViewData[i].dimensions[2];
+      gaDatum.inViewFromRecommends = inViewData[i].metrics[0].values[0];
+      gaData.push(gaDatum);
+    }
+    document.getElementById('query-output').value = JSON.stringify(gaData);
+    */
+    
     var gaData = [];
     var clickData = response.result.reports[0].data.rows;
     var inViewData = response.result.reports[1].data.rows;
@@ -212,7 +288,7 @@
                   }
                 ]
               }
-          */
+          **/
           if(inViewDatum.dimensions[3] === dates[i]) {
             var inViewValue = inViewDatum.metrics[0].values[0];
             if(inViewDatum.dimensions[2] === 'from_recommends') {
@@ -228,10 +304,10 @@
       }
     }
 
-    //var formattedJson = JSON.stringify(response.result, null, 2);
     console.log(gaData);
     var formattedJson = JSON.stringify(gaData);
     document.getElementById('query-output').value = formattedJson;
+    
   }
 </script>
 

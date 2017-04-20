@@ -37,12 +37,14 @@ gulp.task('html',async function() {
   await fs.writeAsync(`${destDir}/index.html`,renderResult);
   browserSync.reload('*.html');
 });
+
 gulp.task('helloGa',() => {
   const destDir = '.tmp/ga';
   return gulp.src('gaRelated/HelloAnalytics.html')
     .pipe(gulp.dest(destDir))
     .pipe(browserSync.stream({once:true}));
 });
+
 gulp.task('style',() => {
   const destDir = '.tmp/styles';
   return gulp.src('client/styles/main.scss')
@@ -64,7 +66,6 @@ gulp.task('script',() => {
    return rollup({
      entry:'client/js/main.js',
      cache: cache,
-     //external:[d3],
      plugins:[
        babel({//这里需要配置文件.babelrc
          exclude:'node_modules/**'
@@ -77,9 +78,17 @@ gulp.task('script',() => {
    }).then(function(bundle) {
      cache = bundle;//Cache for later use
      return bundle.write({//返回promise，以便下一步then()
+       //exports:'named',
        dest: '.tmp/scripts/main.js',
        format: 'iife',
-       sourceMap: true
+       sourceMap: true,
+       /*
+       moduleName:'MyBundle',
+       globals:{
+         queryReports:'queryReports'
+       }
+       */
+       
      });
    }).then(() => {
      browserSync.reload();
@@ -88,8 +97,14 @@ gulp.task('script',() => {
    });
 });
 
+gulp.task('copyGetGaData',() => {
+  const destDir = '.tmp/scripts';
+  return gulp.src('client/js/getGaData/getGaData.js')
+    .pipe(gulp.dest(destDir))
+    .pipe(browserSync.stream({once:true}));
+})
 
-gulp.task('serve',gulp.parallel('html','style','script','helloGa',function() {
+gulp.task('serve',gulp.parallel('html','style','script','helloGa','copyGetGaData',function() {
   browserSync.init({
     server:{
       baseDir: ['.tmp', 'data'],
@@ -101,7 +116,7 @@ gulp.task('serve',gulp.parallel('html','style','script','helloGa',function() {
     port:8080//一定要和“创建凭据”的“已获授权的 JavaScript 来源”设置的端口一致
   });
   gulp.watch('client/styles/*.scss',gulp.parallel('style'));
-  gulp.watch('client/js/**/*.js',gulp.parallel('script'));
+  gulp.watch('client/js/**/*.js',gulp.parallel('script','copyGetGaData'));
   gulp.watch(['views/*.html','data/dataForRender/*.json'],gulp.parallel('html'));
   gulp.watch('gaRelated/*.html',gulp.parallel('helloGa'));
 }))

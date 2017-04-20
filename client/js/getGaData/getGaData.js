@@ -1,28 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Hello Analytics Reporting API V4</title>
-  <meta name="google-signin-client_id" content="166811704494-d8tthgqdg7fs56ou745c8br1cp2a4gqi.apps.googleusercontent.com">
-  <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
-</head>
-<body>
-
-<h1>Hello Analytics Reporting API V4</h1>
-
-<p>
-  <!-- The Sign-in button. This will run `queryReports()` on success. -->
-  <!-- -->
-  <div class="g-signin2" data-onsuccess="queryReports"></div>
-</p>
-
-<!-- The API response will be printed here. -->
-<textarea cols="80" rows="20" id="query-output"></textarea>
-
-<script>
-  // Replace with your view ID.
-  var VIEW_ID = '10995661';
-
+ // Replace with your view ID.
+  const VIEW_ID = '10995661';
+  const dataRange1 =  [//该字段至少有一个有效条目,默认为{"startDate": "7daysAgo", "endDate": "yesterday"}
+    {
+      startDate: '2017-03-15',//'2017-04-01',
+      endDate: '2017-04-16',//'2017-04-01'
+    }
+  ];
+  const dataRange2 = [
+    {
+      startDate:'2017-03-20',
+      endDate:'2017-04-19'
+    }
+  ];
   // Query the API and print the results to the page.
   function queryReports() {
     gapi.client.request({
@@ -34,15 +23,19 @@
           /**构建reportRequests对象。
            * batchGet 方法最多接受五个 ReportRequest 对象。
            * 所有请求都应该有相同的 dateRange、viewId、segments、samplingLevel 和 cohortGroup。
-           */
-          {
+          */
+        
+          {/// 1.得到(Event Category)In Story Recommend  (EventAction)002click_fromRecommends|002click_fromRelatives
             viewId: VIEW_ID,//有效数据视图ID
+            /*
             dateRanges: [//该字段至少有一个有效条目,默认为{"startDate": "7daysAgo", "endDate": "yesterday"}
               {
-                startDate:'2017-03-20' , //'2017-04-01',
-                endDate:'2017-04-19' //'2017-04-12'
+                startDate: '2017-03-15',//'2017-04-01',
+                endDate: '2017-04-16',//'2017-04-01'
               }
             ],
+            */
+            dateRanges:dataRange1,
             metrics: [//该字段中至少有一个有效条目
               {
                 expression: 'ga:totalEvents'
@@ -60,7 +53,7 @@
               }
             ],
             dimensionFilterClauses:[
-              {//1.得到(Event Category)In Story Recommend  (EventAction)002click_fromRecommends|002click_fromRelatives
+              {
                 filters: [ 
                   {
                     dimensionName: 'ga:eventCategory',
@@ -75,12 +68,7 @@
           },
           {/// 2.得到(Event Category)story (Event Action)In view (Event Label)from_recommends|from_relatives
             viewId: VIEW_ID,//有效数据视图ID
-            dateRanges: [//每个Request至多可以有两个dateRange,该字段至少有一个,默认为{"startDate": "7daysAgo", "endDate": "yesterday"}
-              {
-                startDate: '2017-03-20',
-                endDate: '2017-04-19'
-              }
-            ],
+            dateRanges:dataRange1,
             metrics: [//一系列定量测定方法，每个request中至少有一个测定方法，最多有10个测定方法
               {
                 expression: 'ga:totalEvents',//测定方法的表达式
@@ -133,15 +121,11 @@
               }
             ]
            
-          },
+          }
+          /*
           {
             viewId: VIEW_ID,//有效数据视图ID
-            dateRanges: [//该字段至少有一个有效条目,默认为{"startDate": "7daysAgo", "endDate": "yesterday"}
-              {
-                startDate: '2017-03-20',
-                endDate: '2017-04-19'
-              }
-            ],
+            dateRanges:dataRange2,
             metrics: [//该字段中至少有一个有效条目
               {
                 expression: 'ga:totalEvents'
@@ -160,6 +144,7 @@
             ],
             dimensionFilterClauses:[
               {//1.得到(Event Category)In Story Recommend  (EventAction)002click_fromRecommends|002click_fromRelatives
+                operator:'AND',
                 filters: [ 
                   {
                     dimensionName: 'ga:eventCategory',
@@ -177,20 +162,155 @@
               },
             ]
            
-          },
+          }
+          */
         ]
       }
     }).then(displayResults, console.error.bind(console));
   }
 
   function displayResults(response) {
-    var formattedJson = JSON.stringify(response.result, null, 2);
-    document.getElementById('query-output').value = formattedJson;
+    /*
+      var gaData = {
+        dates:[],
+        clickFromRecommends:[],
+        clickFromRelatives:[],
+        inViewFromRecommends:[],
+        inViewFromRelatives:[]
+      };
+    */
+    document.getElementById('response-rawdata').value = JSON.stringify(response.result);
+    /*
+    var gaData = [];
+    var inViewData = response.result.reports[0].data.rows;
+    var dates = [];
+    for (i = 0, len = inViewData.length;i<len; i++) { //循环30次
+      var gaDatum = {
+        date:'',
+        inViewFromRecommends:'',
+      };
+      gaDatum.date = inViewData[i].dimensions[2];
+      gaDatum.inViewFromRecommends = inViewData[i].metrics[0].values[0];
+      gaData.push(gaDatum);
+    }
+    document.getElementById('query-output').value = JSON.stringify(gaData);
+    */
+    
+    const gaData = [];
+    const clickData = response.result.reports[0].data.rows;
+    const inViewData = response.result.reports[1].data.rows;
+    
+    //得到日期数组
+    const dates = [];
+    for (let i = 0, len = clickData.length;i<len; i++) { //循环24次
+      var date = clickData[i].dimensions[2];
+      if(dates.indexOf(date) < 0) {
+        dates.push(date);//最终dates长度为12
+      }
+    }
+
+    //根据日期数组得到每个日期的数据对象
+    for(let i = 0,len = dates.length;i<len;i++) {//循环12次
+      
+      const gaDatum = {
+        date:'',
+        clickFromRecommends:'',
+        clickFromRelatives:'',
+        inViewFromRecommends:'',
+        inViewFromRelatives:''
+      };
+      gaDatum.date = dates[i];
+
+
+      for(let j = 0, l = clickData.length; j < l; j++ ) { //循环24次
+        const clickDatum = clickData[j];
+          /** clickDatum长这样：
+              {
+                  "dimensions": [
+                    "In Story Recommend",
+                    "Click-002from_recommends",
+                    "20170401"
+                  ],
+                  "metrics": [
+                    {
+                      "values": [
+                        "1052"
+                      ]
+                    }
+                  ]
+              }
+          */
+        if(clickDatum.dimensions[2] === dates[i]) {
+          const clickValue = clickDatum.metrics[0].values[0];
+          if(clickDatum.dimensions[1] === 'Click-002from_recommends') {
+            gaDatum.clickFromRecommends = clickValue;
+          } else if(clickDatum.dimensions[1] === 'Click-002from_relatives') {
+            gaDatum.clickFromRelatives = clickValue;
+          }
+        }
+      }
+     
+      for (let j = 0,l = inViewData.length; j < l; j++) { //循环24次
+          const inViewDatum = inViewData[j];
+          /** inViewDatum长这样：
+              {
+                "dimensions": [
+                  "story",
+                  "In View",
+                  "from_recommends",
+                  "20170401"
+                ],
+                "metrics": [
+                  {
+                    "values": [
+                      "97347"
+                    ]
+                  }
+                ]
+              }
+          **/
+          if(inViewDatum.dimensions[3] === dates[i]) {
+            var inViewValue = inViewDatum.metrics[0].values[0];
+            if(inViewDatum.dimensions[2] === 'from_recommends') {
+              gaDatum.inViewFromRecommends = inViewValue;
+            } else if(inViewDatum.dimensions[2] === 'from_relatives') {
+              gaDatum.inViewFromRelatives = inViewValue;
+            }
+          }
+      }  
+
+      if(gaDatum.date && gaDatum.clickFromRecommends && gaDatum.clickFromRelatives && gaDatum.inViewFromRecommends && gaDatum.inViewFromRelatives) {
+        gaData.push(gaDatum);
+      }
+    }
+
+    console.log(gaData);
+    const formattedJson = JSON.stringify(gaData);
+    document.getElementById('query-output').value = formattedJson; 
   }
-</script>
 
-<!-- Load the JavaScript API client and Sign-in library. -->
-<script src="https://apis.google.com/js/client:platform.js"></script>
+  function dealResponse(rawData,rawFields,dealedFields) {
+    /**
+     * @param rawData:Type Array, Eg:response.result.reports[0].data.rows
+     * @param usefulFields: Type Array,Eg：[dimensions[2], metrics[0].values[0]]
+     * @param dealedFileds: Type Array, Eg: ['date','inViewFromRecommends']
+     */
+    const dealedData = [];
+  
+    if(rawFields.length== dealedFields.length) {
+      console.log(`The rawFields.length is not equal to dealedFields.length`);
+      return dealedData;//[]
+    }
+    for (const i = 0; i < rawData.len; i++) { 
+      const dealedDatum = {};
+      const rawDatum = rawData[i];
+      for(const [index,elem] of rawFields) {
+        dealedDatum[dealedFields[index]] = rawDatum.elem;
+      }
+      dealedData.push(dealedDatum);
+    }
+    return dealedData;
+  }
 
-</body>
-</html>
+
+ 
