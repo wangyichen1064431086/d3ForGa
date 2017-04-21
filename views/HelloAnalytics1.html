@@ -3,7 +3,7 @@
 
 <p>
   <!-- The Sign-in button. This will run `queryReports()` on success. -->
-  <div class="g-signin2" data-onsuccess="queryReports"></div>
+  <div class="g-signin2" data-onsuccess="getGaData"></div>
 </p>
 
 <!-- The API response Raw Data will be printed here. -->
@@ -11,12 +11,13 @@
 <div>
 <textarea cols="80" rows="20" id="response-rawdata"></textarea>
 </div>
-<!-- The API response will be printed here. -->
+
+<!-- The Dealed Data of API response will be printed here. -->
+<h2>The Dealed Data From Raw Data</h2>
 <div>
 <textarea cols="80" rows="20" id="query-output"></textarea>
 </div>
 
 
-<!-- Load the JavaScript API client and Sign-in library. -->
 
 

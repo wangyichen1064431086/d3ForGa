@@ -74,7 +74,6 @@ gulp.task('script',() => {
          jsnext:true,
        })
      ]
-
    }).then(function(bundle) {
      cache = bundle;//Cache for later use
      return bundle.write({//返回promise，以便下一步then()
@@ -82,12 +81,7 @@ gulp.task('script',() => {
        dest: '.tmp/scripts/main.js',
        format: 'iife',
        sourceMap: true,
-       /*
-       moduleName:'MyBundle',
-       globals:{
-         queryReports:'queryReports'
-       }
-       */
+       moduleName:'getGaData'
        
      });
    }).then(() => {
@@ -96,15 +90,15 @@ gulp.task('script',() => {
      console.log(err);
    });
 });
-
+/*
 gulp.task('copyGetGaData',() => {
   const destDir = '.tmp/scripts';
   return gulp.src('client/js/getGaData/getGaData.js')
     .pipe(gulp.dest(destDir))
     .pipe(browserSync.stream({once:true}));
 })
-
-gulp.task('serve',gulp.parallel('html','style','script','helloGa','copyGetGaData',function() {
+*/
+gulp.task('serve',gulp.parallel('html','style','script','helloGa',function() {
   browserSync.init({
     server:{
       baseDir: ['.tmp', 'data'],
@@ -116,7 +110,7 @@ gulp.task('serve',gulp.parallel('html','style','script','helloGa','copyGetGaData
     port:8080//一定要和“创建凭据”的“已获授权的 JavaScript 来源”设置的端口一致
   });
   gulp.watch('client/styles/*.scss',gulp.parallel('style'));
-  gulp.watch('client/js/**/*.js',gulp.parallel('script','copyGetGaData'));
+  gulp.watch('client/js/**/*.js',gulp.parallel('script'));
   gulp.watch(['views/*.html','data/dataForRender/*.json'],gulp.parallel('html'));
   gulp.watch('gaRelated/*.html',gulp.parallel('helloGa'));
 }))

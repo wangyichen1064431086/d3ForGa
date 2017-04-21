@@ -1,6 +1,3 @@
-//import {dateParse1} from '../dataManipu/timeManipu.js';
-//import dateNumManipu from '../dataManipu/dateNumManipu.js';
-
 
 class DrawLineTime {
 
@@ -51,8 +48,6 @@ class DrawLineTime {
       this.drawPath(this.chart, data, line, onelineYPro.strokeColor, onelineYPro.strokeWidth);
       //drawPath(chart,data,line,strokeColor,strokeWidth)
     }
-
-
   }
 
   setSize() {
