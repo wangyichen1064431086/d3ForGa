@@ -1,8 +1,14 @@
-.axis text {
-    font: 10px sans-serif;
-    color:white;
+.chart {
+  .axis-text {
+      font: 16px sans-serif;
+      font-weight:bold;
+      color:#000;
+  }
 }
+
+/*
 .axis path, .axis line {
   fill: none;
   stroke: #000;
 }
+*/
