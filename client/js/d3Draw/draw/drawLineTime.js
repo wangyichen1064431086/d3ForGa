@@ -1,29 +1,34 @@
 
 class DrawLineTime {
 
-  constructor(data, lineXPro, lineYPro, axisTextOption, container) {
+  constructor(data, xPro, yPro, axisTextOption, container) {
     /**
      * @param data:type Obj,处理好了的data(date的type就是date,数据的type为Num)
-     * @param lineXPro: type String,想要在x轴表达的值在data中的属性名，Eg：'date'
-     * @param lineYPro: type Array[Obj],想要绘出线条的y轴值相关属性, Eg:
+     * @param xPro: type Obj,data中想要在x轴表达的字段的相关信息,Eg：
+         {
+           name:'date',//字段属性名
+         }
+     * @param yPro: type Array[Obj],data中想要在y轴表达的字段的相关信息, Eg:
        [
           { 
-            yPro:'clickFromRecommends',//y轴数据在data中的属性名
-            strokeColor:'blue',//绘出的线条的颜色
+            name:'clickFromRecommends',//字段属性名
+            color:'blue',//绘出的线条和圆点的颜色
             strokeWidth:'2'//绘出的线条的宽度
+            circleR:3//绘出的数据圆点的半径
           }, 
           {
-            yPro:'clickFromRelatives',
-            strokeColor:'red',
-            strokeWidth:'2'
+            name:'clickFromRelatives',
+            color:'red',
+            strokeWidth:'2',
+            circleR:3
           }
        ]
      * @param axisTextOption: Type Array[Obj]，关于添加的文字的相关属性，Eg:
        {
          xText:{
-            width:,
-            height:,
-            content:
+            width:200,//Type Number,文字块宽度
+            height:20,//Type Number,文字块高度
+            content:'Date',//Type String,文字内容字符串
          },
          yText:{
             width:,
@@ -34,29 +39,45 @@ class DrawLineTime {
      * @param container:type String,一个d3 Selector，Eg:'.chart'
     */
 
-    this.setSize();
+    this.setSize();//得到this.margin, this.width, this.height
+    this.data = data;
+    this.axisTextOption = axisTextOption;
 
-    const yPros = lineYPro.map(x => {
+    const xProName = xPro.name;
+    const yProNames = yPro.map(item => {
       //得到y轴数据在data中的属性名组成的数组，Eg:['clickFromRecommends','clickFromRelatives',...]
-      return x['yPro'];
+      return item['name'];
     });
-    const scale = this.scaleFunc(data, lineXPro, yPros);//得到scale.x,scale.y
-    const axis = this.axisFunc(scale.x, scale.y);//得到axis.xAxis,axis.yAxis
+    const scale = this.scaleFunc(xProName, yProNames);//得到scale.x,scale.y
+    this.scale = scale;//需要在多个方法上多次复用的变量，以类的属性的形式传入，而非以方法参数形式传入
 
-    this.drawChart(container);
-    this.drawAxis(this.chart, axis.xAxis, axis.yAxis);
+    const axis = this.axisFunc();//得到axis.xAxis,axis.yAxis,QUEST：直接在方法中得到this.属性，还是返回值在constructor里面赋给this.属性
+    this.axis = axis;
 
-    for(let i = 0, len = lineYPro.length; i < len; i++) {
-      const onelineYPro = lineYPro[i];
-      const line = this.lineFunc(lineXPro, onelineYPro.yPro, scale.x, scale.y);
-      this.drawPath(this.chart, data, line, onelineYPro.strokeColor, onelineYPro.strokeWidth);
-    }
-    this.drawAxisText(this.chart, axisTextOption);
+    const transition = this.transitionFunc();
+    this.transition = transition;
+
+    this.drawChart(container);//产生this.chart
+
+    this.drawAxis();
+
+    for(let i = 0, len = yPro.length; i < len; i++) {
+      const onelineYPro = yPro[i];
+      const yProName = onelineYPro.name;
+      const color = onelineYPro.color;
+      const strokeWidth = onelineYPro.strokeWidth;
+      const circleR= onelineYPro.circleR;
+      const line = this.lineFunc(xProName, yProName);
+      this.drawPath(line, color, strokeWidth);
+      const circles = this.drawCircleOfPath(xProName, yProName, color, circleR);
+      //this.addDataTagTrigger(circles, xProName, yProName);
+  }
+    this.drawAxisText();
   }
 
   setSize() {
     /**
-     * @use: produce the properties this.margin、this.width、this.height
+     * @dest: produce the properties this.margin、this.width、this.height
      * @return: nothing
      */
     this.margin = {
@@ -70,26 +91,26 @@ class DrawLineTime {
   }
 
 
-  scaleFunc(data, lineXPro, yPros) {
+  scaleFunc(xProName, yProNames) {
     /**
      * @dest: 生成x、y轴的scale函数:x、y
-     * @param data:Type Array，就是作为数据材料的data，即constructor的参数data
-     * @param lineXPro:Type String, 就是构造函数中的lineXPro,即想要在x轴表达的值在data中的属性名，Eg：'date'
-     * @param yPros:Type Array, y轴数据（想要绘制的）在data中的属性名组成的数组，Eg:['clickFromRecommends','clickFromRelatives',...]
+     * @rely data:Type Array，就是作为数据材料的data，即constructor的参数data
+     * @param xProName:Type String, 就是构造函数中的lineXPro,即想要在x轴表达的值在data中的属性名，Eg：'date'
+     * @param yProNames:Type Array, y轴数据（想要绘制的）在data中的属性名组成的数组，Eg:['clickFromRecommends','clickFromRelatives',...]
      * @return:Type Obj ,with two properties:x,y
      */
     const x = d3.scaleTime()
         .rangeRound([0, this.width])
-        .domain(d3.extent(data, d => d[lineXPro]));
+        .domain(d3.extent(this.data, d => d[xProName]));
 
     const y = d3.scaleLinear()
         .rangeRound([this.height, 0])
-        .domain([0, d3.max(data, (d) => {
+        .domain([0, d3.max(this.data, (d) => {
           //先找到单个datum中想要绘制的属性们中的最大值(a)，再找到所有data的想绘制属性的最大值(a)的最大值(b)。
 
           const yProsValue = [];//存放单个datum中位于yPros中的属性名，目的是为了找出这些属性中所有data中的最大值
           for(const prop in d) {
-            if(yPros.indexOf(prop)>=0) {
+            if(yProNames.indexOf(prop)>=0) {
               yProsValue.push(d[prop]);
             }
           }
@@ -103,16 +124,15 @@ class DrawLineTime {
   }
 
   
-  axisFunc (x,y) {
+  axisFunc () {
     /**
      * @dest: 生成x、y轴的axis函数：xAxis、yAxis
-     * @param x: Type scale func, x轴scale函数:x, Eg：scale.x
-     * @param y: Type scale func, y轴scale函数:y, Eg: scale.y
+     * @rely:this.scale
      * @return: Type Obj, with two properties: xAxis, yAxis
     */
     
-    const xAxis = d3.axisBottom(x);
-    const yAxis = d3.axisLeft(y);
+    const xAxis = d3.axisBottom(this.scale.x);
+    const yAxis = d3.axisLeft(this.scale.y);
     return {
       xAxis,
       yAxis
@@ -120,26 +140,34 @@ class DrawLineTime {
   }
 
 
-  lineFunc(xProp, yProp,scalex,scaley) {
+  lineFunc(xPropName, yPropName) {
     /**
      * @dest: 生成折线绘制函数:lineClickFromRecommends等4个
+     * @rely: this.scale.x, this.scale.y
      * @param xProp：Type time, 作为x轴的数据的属性名，eg:date
      * @param yProp: Type number,作为y轴的数据的属性名，eg:clickFromRecommends
      * @return: Type func line,即生成的折线绘制函数line
      */
      const line = d3.line()
-      .x(d => scalex(d[xProp]))
-      .y(d => scaley(d[yProp]));
+      .x(d => this.scale.x(d[xPropName]))
+      .y(d => this.scale.y(d[yPropName]));
 
      return line; 
   }
 
 
+  transitionFunc() {
+    const t = d3.transition()
+        .duration(2000)//设置过渡的持续时间，单位ms
+        .ease(d3.easeCubic);//设置过渡的缓动函数，也可以是d3.easeCubic(默认)
+    return t;
+  }
+
   drawChart(container) {
     /**
      * @dest: 绘制绘图区域, 生成this.chart
      * @param container: Type String,即constractor的参数container，即一个d3 Selector，Eg:'.chart'
-     * @return: nothing
+     * @return: nothing,但是得到了this.chart
     */
     this.chart = d3.select(container)
         .attr("width", this.width + this.margin.left + this.margin.right)
@@ -150,57 +178,108 @@ class DrawLineTime {
   }
 
 
-  drawAxis(chart, xAxis, yAxis) {
+  drawAxis() {
     /**
      * @dest:绘制x轴、y轴
-     * @param chart:Type d3 Selection, 要绘制x轴/y轴的基础元素
-     * @param xAxis:Type d3Obj xAxis
-     * @param yAxis:Type d3Obj yAxis
+     * @rely this.chart:Type d3 Selection, 要绘制x轴/y轴的基础元素
+     * @rely this.axis.xAxis:Type d3Obj xAxis
+     * @rely this.axis.yAxis:Type d3Obj yAxis
      */
-    chart.append("g")
+    this.chart.append("g")
       .attr("class","x axis")
       .attr("transform", "translate(0," + this.height + ")")
-      .call(xAxis.ticks(d3.timeDay.every(5)));
+      .call(this.axis.xAxis.ticks(d3.timeDay.every(5)));
     
-    chart.append("g")
+    this.chart.append("g")
       .attr("class", "y axis")
-      .call(yAxis);
+      .call(this.axis.yAxis);
   }
 
 
-  drawPath(chart,data,line,strokeColor,strokeWidth) {
+  drawPath(line,strokeColor,strokeWidth) {
     /**
      * @dest:绘制折线
-     * @param chart:d3 Selection, Eg：this.chart
-     * @param data:Type Array，就是作为数据材料的data，即constructor的参数data
+     * @rely this.chart:d3 Selection, Eg：this.chart
+     * @rely this.data:Type Array，就是作为数据材料的data，即constructor的参数data
      * @param line:Type d3fun:line
      * @param strokeColor:Type String, 线条颜色，Eg:'steelblue'
      * @param strokeWidth:Type Stirng, 线条粗细，Eg:'2'
     */
-    chart.append('path')
-      .datum(data)
+
+    this.chart.append('path')
+      .datum(this.data)
       .attr('d', line)
+     
       .style('fill','none')
-      .style('stroke',strokeColor)
       .style('storke-linejoin','round')
-      .style('stroke-width',strokeWidth);
+      .style('stroke',strokeColor)
+      .style('stroke-width',0)
+      .transition(this.transition)//一前一后两种状态之间的过渡
+      .style('stroke-width',strokeWidth); 
   }
 
-  drawAxisText(chart, axisTextOption) {
+  drawCircleOfPath(xProName, yProName, color, r) {
+    /**
+     * @dest: 绘制折线上的圆点
+     * @param xProp：Type time, 作为x轴的数据的属性名，eg:date
+     * @param yProp: Type number,作为y轴的数据的属性名，eg:clickFromRecommends
+     * @param color
+     * @param r
+     * @return circles: Type d3 selections
+    */
+    const circles = this.chart.append('g')
+      .selectAll("circle")
+      .data(this.data)
+    .enter().append("circle")
+
+    circles.attr("cx", d => this.scale.x(d[xProName]))
+      .attr("cy", d => this.scale.y(d[yProName]))
+      .style('fill', color)
+      .attr("r",0)
+      .transition(this.transition)
+      .attr("r",r);
+    
+    return circles;
+  }
+
+  addDataTagTrigger(circles, xProName, yProName) {
+    /**
+     * @dest:为折线上转折处的圆点添加触发数据信息标签的事件
+     * @param circles: Type d3 selections
+     */
+
+      //const triggerElem = document.createElement('div');
+      //triggerElem.className = 'triggerBlock';
+      const triggerBlock = this.chart.append('text')
+        .classed('triggerBlock',true);
+
+      circles.on('mouseover', function(d, i, nodes) {
+        const transform = nodes[i].attr('transform');//这句有误， Uncaught TypeError: nodes[i].attr is not a function
+        const datumInfo = `${yProName}:${d[yProName]}`;
+        triggerBlock.html = datumInfo
+          .attr('left',left)
+          .attr('transform', transform)
+          .style('display','block');
+      });
+
+      circles.on('mouseout', function(d, i, nodes) {
+        triggerBlock.style('display','none');
+      })
+  }
+
+  drawAxisText() {
     /**
      * @dest: add some text to the chart
-     * @param chart:Type d3 Selection, 要绘制x轴/y轴的基础元素,Eg: this.chart
-     * @param option: Type Object, contains the value of attributes of the text
-     * //@param option.x: Type String(Number with Quots) or Number, x attribute of text
-     * //@param option.y: Type String(Number with Quots) or Number, y attribute of text
-     * //@param option.with: Type  String(Number with Quots) or Number, width attribute of text
-     * //@param option.height: Type  String(Number with Quots) or Number, height attribute of text
-     * @param option.content:Type String, the innerHTML of text
+     * @rely this.chart:Type d3 Selection, 要绘制x轴/y轴的基础元素,Eg: this.chart
+     * @rely this.axisTextOption: Type Object, contains the value of attributes of the text
      * @return nothing
     */
-    if(axisTextOption.xText) {
-      const xText = axisTextOption.xText;
-      chart.append('text')
+    if(!this.axisTextOption){
+      return;
+    }
+    if(this.axisTextOption.xText) {
+      const xText = this.axisTextOption.xText;
+      this.chart.append('text')
       .attr('width', xText.width)
       .attr('height', xText.height)
       .attr('transform', `translate(${this.width-xText.width}, ${this.height+40})`)
@@ -208,9 +287,9 @@ class DrawLineTime {
       .classed('axis-text', true);
     }
 
-    if(axisTextOption.yText) {
-      const yText = axisTextOption.yText;
-      chart.append('text')
+    if(this.axisTextOption.yText) {
+      const yText = this.axisTextOption.yText;
+      this.chart.append('text')
         .attr('width', yText.width)
         .attr('height', yText.height)
         .attr('transform', `translate(${-yText.height-40}, ${yText.width+5}) rotate(-90) `)
@@ -218,22 +297,28 @@ class DrawLineTime {
         .classed('axis-text', true);
     }
   }
+
+
   
   static init(data) {
   
     new DrawLineTime(
         data,
-        'date',
+        {
+          name:'date'
+        },
         [
           { 
-              yPro:'clickFromRecommends',
-              strokeColor:'blue',
-              strokeWidth:'2'
+              name:'clickFromRecommends',
+              color:'blue',
+              strokeWidth:'2',
+              circleR:3
             }, 
             {
-              yPro:'clickFromRelatives',
-              strokeColor:'red',
-              strokeWidth:'2'
+              name:'clickFromRelatives',
+              color:'red',
+              strokeWidth:'2',
+              circleR:3
             }
         ],
         {
@@ -252,17 +337,21 @@ class DrawLineTime {
     );
     new DrawLineTime(
         data,
-        'date',
+        {
+          name:'date'
+        },
         [
           { 
-              yPro:'inViewFromRecommends',
-              strokeColor:'blue',
-              strokeWidth:'2'
+              name:'inViewFromRecommends',
+              color:'blue',
+              strokeWidth:2,
+              circleR:3
             }, 
             {
-              yPro:'inViewFromRelatives',
-              strokeColor:'red',
-              strokeWidth:'2'
+              name:'inViewFromRelatives',
+              color:'red',
+              strokeWidth:2,
+              circleR:3
             }
         ],
         {
@@ -281,17 +370,21 @@ class DrawLineTime {
     );
     new DrawLineTime(
         data,
-        'date',
+        {
+          name:'date'
+        },
         [
           { 
-              yPro:'clickInviewRateFromRecommends',
-              strokeColor:'blue',
-              strokeWidth:'2'
+              name:'clickInviewRateFromRecommends',
+              color:'blue',
+              strokeWidth: 2 ,
+              circleR:3
             }, 
             {
-              yPro:'clickInviewRateFromRelatives',
-              strokeColor:'red',
-              strokeWidth:'2'
+              name:'clickInviewRateFromRelatives',
+              color:'red',
+              strokeWidth: 2,
+              circleR:3
             }
         ],
         {
