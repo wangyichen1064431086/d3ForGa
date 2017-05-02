@@ -5,10 +5,14 @@
       color:#000;
   }
 }
+/*
 .triggerBlock {
-  font: 10px sans-serif;
-  color:'green';
-  display: 'none';
+  z-index:10;
+}
+*/
+.triggerText {
+  font: 14px sans-serif;
+  z-index:15;
 }
 /*
 .axis path, .axis line {

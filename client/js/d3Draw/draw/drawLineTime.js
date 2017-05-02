@@ -70,7 +70,7 @@ class DrawLineTime {
       const line = this.lineFunc(xProName, yProName);
       this.drawPath(line, color, strokeWidth);
       const circles = this.drawCircleOfPath(xProName, yProName, color, circleR);
-      //this.addDataTagTrigger(circles, xProName, yProName);
+      this.addDataTagTrigger(circles, xProName, yProName);
   }
     this.drawAxisText();
   }
@@ -82,7 +82,7 @@ class DrawLineTime {
      */
     this.margin = {
       top:20,
-      right: 30,
+      right: 80,
       bottom: 60,
       left:80
     };
@@ -246,24 +246,45 @@ class DrawLineTime {
     /**
      * @dest:为折线上转折处的圆点添加触发数据信息标签的事件
      * @param circles: Type d3 selections
+     * @param xProName
+     * @param yProName
      */
 
-      //const triggerElem = document.createElement('div');
-      //triggerElem.className = 'triggerBlock';
-      const triggerBlock = this.chart.append('text')
-        .classed('triggerBlock',true);
-
+      /*
+      const triggerBlock = this.chart.append('rect')
+                .classed('triggerBlock',true)
+                .attr('height',50)
+                .attr('width',200)
+                .style('stroke','gray')
+                .style('fill','#ddd')
+                .style('display','none');
+      */
+      const triggerText =  this.chart.append('text')
+            .classed('triggerText',true)
+            //.style('stroke','green')
+            .style('display','none');
+   
       circles.on('mouseover', function(d, i, nodes) {
-        const transform = nodes[i].attr('transform');//这句有误， Uncaught TypeError: nodes[i].attr is not a function
+        
+        //MARK:nodes[i]既不是文档对象模型的HTMLElement、也不是d3模型的d3.selection
+        console.log(d3.mouse(nodes[i]));
+        const coordinates = d3.mouse(nodes[i]);//获取对应点相对于container的坐标
+
         const datumInfo = `${yProName}:${d[yProName]}`;
-        triggerBlock.html = datumInfo
-          .attr('left',left)
-          .attr('transform', transform)
-          .style('display','block');
+        
+        triggerText.attr('transform', `translate(${coordinates[0]-80},${coordinates[1]+25})`)
+            .html(datumInfo)
+            .style('display','block');
+        
+        /*
+         triggerBlock.attr('transform', `translate(${coordinates[0]},${coordinates[1]})`)
+           .style('display','block');
+        */
       });
 
       circles.on('mouseout', function(d, i, nodes) {
-        triggerBlock.style('display','none');
+        //triggerBlock.style('display','none');
+        triggerText.style('display','none');
       })
   }
 
