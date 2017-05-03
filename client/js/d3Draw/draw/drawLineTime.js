@@ -423,6 +423,42 @@ class DrawLineTime {
         '#rateDatasLines'
     );
   }
+
+  static drawDoubleClickRequest(data) {
+    new DrawLineTime(
+        data,
+        {
+          name:'date'
+        },
+        [
+          { 
+              name:'successRequestRate',
+              color:'blue',
+              strokeWidth: 2 ,
+              circleR:3
+            }, 
+            {
+              name:'failRequestRate',
+              color:'red',
+              strokeWidth: 2,
+              circleR:3
+            }
+        ],
+        {
+          xText:{
+              width: 100,
+              height: 20,
+              content:'Date'
+          },
+          yText:{
+              width: 200,
+              height: 20,
+              content: 'Rate'
+          }
+        },
+        '#rateDatasLines'
+    );
+  }
   
 }
 

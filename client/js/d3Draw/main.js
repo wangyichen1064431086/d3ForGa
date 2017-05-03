@@ -16,12 +16,16 @@ function clickToDraw() {
     dateNumManipu(gaData, dateParse1);
     //drawFromData(gaData, '#allLines');
 
+    /*
     dataAdd_RateOf2Pro(gaData,'clickFromRecommends','inViewFromRecommends','clickInviewRateFromRecommends');
 
     dataAdd_RateOf2Pro(gaData,'clickFromRelatives','inViewFromRelatives','clickInviewRateFromRelatives');
-
-
-    DrawLineTime.init(gaData);//Class中的静态方法也是可以传参数的
+    */
+    dataAdd_RateOf2Pro(gaData,'success','request','successRequestRate');
+    dataAdd_RateOf2Pro(gaData,'fail','request','failRequestRate');
+    console.log(gaData);
+    //DrawLineTime.init(gaData);//Class中的静态方法也是可以传参数的//
+    DrawLineTime.drawDoubleClickRequest(gaData);
   }, 
 
   false);
