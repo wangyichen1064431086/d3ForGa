@@ -2,7 +2,7 @@
 //import reportRequests from './reportRequests/inStoryRecommends.js';//a
 import reportRequests from './reportRequests/doubleClickRequests';
 import dataManipuForShow from './dataManipuForShow/main.js';
-
+import draw from '../d3Draw/main.js';
 
 function getGaData() {
   /**
@@ -25,15 +25,16 @@ function displayResults(response) {
   */
 
   /// 在response-rawdata区域展示raw data：response.result
-  document.getElementById('response-rawdata').value = JSON.stringify(response.result);
+  //document.getElementById('response-rawdata').value = JSON.stringify(response.result);
   
   /// 处理每个reports，得到每个reports的数据集
   const pickupOneReportData = dataManipuForShow.pickupOneReportData;
-  /* a
-  const dataForClickFromRecommends = pickupOneReportData(response,0,2,'date',0,'clickFromRecommends');
-  const dataForClickFromRelatives =  pickupOneReportData(response,1,2,'date',0, 'clickFromRelatives');
-  const dataForInviewFromRecommends =  pickupOneReportData(response,2,3,'date',0,'inViewFromRecommends');
-  const dataForInviewFromRelatives =  pickupOneReportData(response,3,3,'date',0,'inViewFromRelatives');  */
+  /* Eg:(a)
+    const dataForClickFromRecommends = pickupOneReportData(response,0,2,'date',0,'clickFromRecommends');
+    const dataForClickFromRelatives =  pickupOneReportData(response,1,2,'date',0, 'clickFromRelatives');
+    const dataForInviewFromRecommends =  pickupOneReportData(response,2,3,'date',0,'inViewFromRecommends');
+    const dataForInviewFromRelatives =  pickupOneReportData(response,3,3,'date',0,'inViewFromRelatives');  
+  */
   const dataForRequset = pickupOneReportData(response,0,0,'date',0,'request');
   const dataForSuccess =  pickupOneReportData(response,1,0,'date',0, 'success');
   const dataForFail =  pickupOneReportData(response,2,0,'date',0,'fail');
@@ -48,20 +49,24 @@ function displayResults(response) {
     ],
     'date'
   ); 
-  /* a
-  const mergedResult = mergeData(
-    [
-      dataForClickFromRecommends,
-      dataForClickFromRelatives,
-      dataForInviewFromRecommends,
-      dataForInviewFromRelatives
-    ],
-    'date'
-  ); 
+  /* Eg:(a)
+    const mergedResult = mergeData(
+      [
+        dataForClickFromRecommends,
+        dataForClickFromRelatives,
+        dataForInviewFromRecommends,
+        dataForInviewFromRelatives
+      ],
+      'date'
+    ); 
   */
+
   /// 展示结果数据集
   const formattedResult = JSON.stringify(mergedResult);
-  document.getElementById('query-output').value = formattedResult; 
+  //document.getElementById('query-output').value = formattedResult; 
+  console.log(mergedResult);
+  /// 绘制数据chart
+  draw(mergedResult);
 }
 
 

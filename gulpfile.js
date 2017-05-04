@@ -74,14 +74,6 @@ gulp.task('script',() => {
      console.log(err);
    });
 });
-/*
-gulp.task('copyGetGaData',() => {
-  const destDir = '.tmp/scripts';
-  return gulp.src('client/js/getGaData/getGaData.js')
-    .pipe(gulp.dest(destDir))
-    .pipe(browserSync.stream({once:true}));
-})
-*/
 
 
 gulp.task('style',() => {
@@ -113,77 +105,12 @@ gulp.task('serve',gulp.parallel('html','style','script','helloGa',function() {
   });
   gulp.watch('client/styles/*.scss',gulp.parallel('style'));
   gulp.watch('client/js/**/*.js',gulp.parallel('script'));
-  gulp.watch(['views/*.html','data/dataForRender/*.json'],gulp.parallel('html'));
-  gulp.watch('gaRelated/*.html',gulp.parallel('helloGa'));
+  gulp.watch(['views/**/*.html','data/dataForRender/*.json'],gulp.parallel('html'));
 }));
 
-
-gulp.task('demo-script',() => {
-  // TODO:关于rollup需要再认真学习一下
-   return rollup({
-     entry:'client/js/mainForDemo.js',
-     cache: cache,
-     plugins:[
-       babel({//这里需要配置文件.babelrc
-         exclude:'node_modules/**'
-       }),
-       nodeResolve({
-         jsnext:true,
-       })
-     ]
-   }).then(function(bundle) {
-     cache = bundle;//Cache for later use
-     return bundle.write({//返回promise，以便下一步then()
-       //exports:'named',
-       dest: '.tmp/scripts/mainForDemo.js',
-       format: 'iife',
-       sourceMap: true,
-       //moduleName:'getGaData'
-       
-     });
-   }).then(() => {
-     browserSync.reload();
-   }).catch(err => {
-     console.log(err);
-   });
-});
-
-gulp.task('demo-html',async function() {
-  const destDir = '.tmp';
-  const dataForRender = await fs.readAsync('data/dataForRender/data.json','json');//await 可以获取promise中resolve的值
-  const renderResult = await render('doubleClickRequests.html',dataForRender);
-  await fs.writeAsync(`${destDir}/doubleClickRequests.html`,renderResult);
-  browserSync.reload('*.html');
-});
-
-gulp.task('demo-serve',gulp.parallel('demo-html','style','demo-script',function() {
-  browserSync.init({
-    server:{
-      baseDir: ['.tmp', 'data'],
-      //directory:true,
-      index:'doubleClickRequests.html',
-      routes: {
-        '/node_modules':'node_modules'
-      }
-    },
-    port:9000//一定要和“创建凭据”的“已获授权的 JavaScript 来源”设置的端口一致
-  });
-  gulp.watch('client/styles/*.scss',gulp.parallel('style'));
-  gulp.watch('client/js/**/*.js',gulp.parallel('demo-script'));
-  gulp.watch(['views/doubleClickRequests.html','data/dataForRender/*.json'],gulp.parallel('demo-html'));
-}));
 
 gulp.task('smoosh',() => {
   const destDir = 'dist';
-  /*
-	if(!isThere(destDir)){
-		mkdirp(destDir,(err) => {
-			if(err) {
-				console.log(err);
-			}
-		});
-	}
-  */
 	return gulp.src('.tmp/*.html')
 		.pipe($.smoosher({
 			ignoreFilesNotFound:true
@@ -191,7 +118,7 @@ gulp.task('smoosh',() => {
 		.pipe(gulp.dest(destDir));
 });
 
-gulp.task('minify',function(){//不知为何这个任务有时候没法用	
+gulp.task('minify', function() {	
 	const destDir = 'deploy';
 	return gulp.src('dist/*.html')
 		//.pipe($.useref())
@@ -214,7 +141,7 @@ gulp.task('minify',function(){//不知为何这个任务有时候没法用
 			showFiles:true,
 			showTotal:true
 		}))
-		.pipe(gulp.dest(destDir));//此处这个destDir必须要是已经存在的
+		.pipe(gulp.dest(destDir));
 });
 
 gulp.task('copy',() => {
@@ -223,6 +150,5 @@ gulp.task('copy',() => {
     .pipe(gulp.dest(destDir));
 });
 
-//gulp.task('demo-publish', gulp.series('demo-html','style','demo-script','demo-smoosh','demo-minify','demo-copy'));
 
 gulp.task('publish', gulp.series('html','style','script','smoosh','minify','copy'));

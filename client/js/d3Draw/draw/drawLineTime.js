@@ -86,8 +86,8 @@ class DrawLineTime {
       bottom: 60,
       left:80
     };
-    this.width = 800 - this.margin.left - this.margin.right,
-    this.height = 500 - this.margin.top - this.margin.bottom;
+    this.width = 1000 - this.margin.left - this.margin.right,
+    this.height = 300 - this.margin.top - this.margin.bottom;
   }
 
 
@@ -437,13 +437,15 @@ class DrawLineTime {
               color:'blue',
               strokeWidth: 2 ,
               circleR:3
-            }, 
-            {
-              name:'failRequestRate',
-              color:'red',
-              strokeWidth: 2,
-              circleR:3
             }
+            /*, 
+              {
+                name:'failRequestRate',
+                color:'red',
+                strokeWidth: 2,
+                circleR:3
+              }
+            */
         ],
         {
           xText:{

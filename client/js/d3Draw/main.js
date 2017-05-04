@@ -3,19 +3,19 @@ import dateNumManipu from './dataManipuForDraw/dateNumManipu.js';
 import {dataAdd_RateOf2Pro} from './dataManipuForDraw/dataAddCompuPro.js';
 //import drawFromData from './draw/drawFromData.js';
 import DrawLineTime from './draw/drawLineTime.js';
-import data from '../getGaData/saveDealedData/doubleClickRequestsData.js';
+//import data from '../getGaData/saveDealedData/doubleClickRequestsData.js';
 
-var resultData = data;
+//var resultData = data;
 
-function draw() {
-  const gaData = data || JSON.parse(document.getElementById('query-output').value);
-
+function draw(gaData) {
+   /**
+    * @param gaData:Type Array, 已经完全处理好了的ga数据
+    */
     if (typeof gaData !== 'object') {
       console.log(`No right gaData`);
       return;
     }
     dateNumManipu(gaData, dateParse1);
-    //drawFromData(gaData, '#allLines');
 
     /*
     dataAdd_RateOf2Pro(gaData,'clickFromRecommends','inViewFromRecommends','clickInviewRateFromRecommends');
@@ -24,18 +24,18 @@ function draw() {
     */
     dataAdd_RateOf2Pro(gaData,'success','request','successRequestRate');
     dataAdd_RateOf2Pro(gaData,'fail','request','failRequestRate');
-    console.log(gaData);
+  
     //DrawLineTime.init(gaData);//Class中的静态方法也是可以传参数的//
     DrawLineTime.drawDoubleClickRequest(gaData);
-    resultData = gaData;
 }
 
+/*
 function clickToDraw() {
  
   document.getElementById('startDraw').addEventListener("click", 
   draw, 
   false);
 }
-
-export {draw,clickToDraw,resultData};
+*/
+export default draw;
 

@@ -1,3 +1,7 @@
+.devSee {
+  display: none;
+}
+
 .chart {
   .axis-text {
       font: 16px sans-serif;
@@ -5,11 +9,14 @@
       color:#000;
   }
 }
-/*
-.triggerBlock {
-  z-index:10;
+
+.svgContainer {
+  width:100%;
+  svg {
+    margin: 30px auto;
+    display: block;
+  }
 }
-*/
 .triggerText {
   font: 14px sans-serif;
   z-index:15;
