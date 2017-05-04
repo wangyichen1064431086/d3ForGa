@@ -1,4 +1,5 @@
 {
   "webpageTitle":"D3 for FTC Google Analytics",
-  "firstText":"First：Click SignedIn Button, Get the Ga Data"
+  "firstText":"First：Click SignedIn Button, Get the Ga Data",
+  "SecondText":"Next: If the First Step is seccessfull, Click the Draw Button, Draw the Chart"
 }

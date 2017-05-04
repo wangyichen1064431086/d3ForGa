@@ -9,18 +9,26 @@
     <meta name="google-signin-client_id" content="166811704494-d8tthgqdg7fs56ou745c8br1cp2a4gqi.apps.googleusercontent.com">
     <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
     <title>{{ webpageTitle }}</title>
+    <!-- smoosh -->
     <link rel="stylesheet" type="text/css" href="styles/main.css">
-    <!--<script src="https://apis.google.com/js/client:platform.js"></script>-->
+    <!-- endsmoosh -->
   </head>
   <body>
-    {% include "HelloAnalytics1.html" %}
-    {% include "d3Chart.html" %}
+    <h1>The Data and Chart about DoubleClickRequests</h1>
+    <h2>The Data</h2>
+    <div>
+      <textarea cols="100" rows="10" id="query-output"></textarea>
+    </div>
 
-    <!-- Load the JavaScript API client and Sign-in library. -->
-    <script src = "https://apis.google.com/js/client:platform.js"></script>
+    <h2>The chart</h2>
+    <h3>提示：将光标移动到数据点上查看数据信息</h3>
+    <svg  id="rateDatasLines">
+    </svg>
 
-    <!-- Load d3 library -->
-    <script src = "/node_modules/d3/build/d3.js"></script>
-    <script src = "scripts/main.js"></script>
+    <!-- smoosh -->
+    <!--<script src = "/node_modules/d3/build/d3.js"></script>-->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src = "scripts/mainForDemo.js"></script>
+    <!-- endsmoosh -->
   </body>
 </html>

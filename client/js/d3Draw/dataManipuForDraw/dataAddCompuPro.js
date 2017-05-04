@@ -7,7 +7,7 @@ function dataAdd_RateOf2Pro (data,pro1,pro2,newRatePro) {
     if(typeof data[i][pro2] !== 'number') {
       data[i][pro2] = +data[i][pro2];
     }
-    data[i][newRatePro] = data[i][pro1]/data[i][pro2];
+    data[i][newRatePro] = (data[i][pro1]/data[i][pro2]).toFixed(4);
     //console.log(`data[${i}][${newRatePro}]:${data[i][newRatePro]}`);
   }
 }

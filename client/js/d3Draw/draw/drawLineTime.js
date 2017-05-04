@@ -188,7 +188,8 @@ class DrawLineTime {
     this.chart.append("g")
       .attr("class","x axis")
       .attr("transform", "translate(0," + this.height + ")")
-      .call(this.axis.xAxis.ticks(d3.timeDay.every(5)));
+      .call(this.axis.xAxis.ticks(d3.timeDay));
+      //.call(this.axis.xAxis.ticks(d3.timeDay.every(5)));
     
     this.chart.append("g")
       .attr("class", "y axis")

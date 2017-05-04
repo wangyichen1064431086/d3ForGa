@@ -1,0 +1,3 @@
+const  data = [{"date":"20170427","request":"192574","success":"166405","fail":"27543"},{"date":"20170428","request":"103504","success":"98007","fail":"5157"},{"date":"20170429","request":"83964","success":"80007","fail":"3666"},{"date":"20170430","request":"79732","success":"75369","fail":"3795"},{"date":"20170501","request":"103140","success":"97800","fail":"5089"},{"date":"20170502","request":"111270","success":"102048","fail":"8481"},{"date":"20170503","request":"278034","success":"262305","fail":"12368"}];
+
+export default data;
