@@ -1,0 +1,7 @@
+@import "o-buttons/main";
+.role-btn-group {
+  @include oButtonsGroup("role-btn");
+}
+.role-btn {
+  @include oButtons($size:big,$theme:b2c);
+}
