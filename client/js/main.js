@@ -1,7 +1,6 @@
 import getGaData from './getGaData/main.js';
+import showAndHide from './ui/btn.js';
 
-//import {clickToDraw} from './d3Draw/main.js';
-//clickToDraw();
-
+showAndHide.chooseRole();
 export default getGaData;
 

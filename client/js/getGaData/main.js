@@ -4,16 +4,38 @@ import reportRequests from './reportRequests/doubleClickRequests';
 import dataManipuForShow from './dataManipuForShow/main.js';
 import draw from '../d3Draw/main.js';
 
+
+
+
 function getGaData() {
   /**
    * @usage: Query the API and print the results to the page.
   */
+  let gaReportRequest;
+  let editReportRequest = [];
+  try {
+      editReportRequest = document.getElementById("reportRequest").value;
+      console.log(editReportRequest);
+      editReportRequest = JSON.parse(editReportRequest);
+  } catch(err) {
+    editReportRequest = [];
+    console.log(err);
+  }
+
+  if(editReportRequest.length > 0 && editReportRequest instanceof Array) {
+    console.log('It is manually editted data');
+    gaReportRequest = editReportRequest;
+  } else {
+    console.log('It is default data')
+    gaReportRequest = reportRequests;
+  }
+
   gapi.client.request({
     path: '/v4/reports:batchGet',
     root: 'https://analyticsreporting.googleapis.com/',
     method: 'POST',
     body: {
-      reportRequests
+      "reportRequests":gaReportRequest
     }
   }).then(displayResults, console.error.bind(console));
 }
@@ -24,8 +46,8 @@ function displayResults(response) {
    * @param response: the response of gapi request
   */
 
-  /// 在response-rawdata区域展示raw data：response.result
-  //document.getElementById('response-rawdata').value = JSON.stringify(response.result);
+  /// 在responseRawData区域展示raw data：response.result
+  //document.getElementById('responseRawData').value = JSON.stringify(response.result);
   
   /// 处理每个reports，得到每个reports的数据集
   const pickupOneReportData = dataManipuForShow.pickupOneReportData;
@@ -61,10 +83,8 @@ function displayResults(response) {
     ); 
   */
 
-  /// 展示结果数据集
-  const formattedResult = JSON.stringify(mergedResult);
-  //document.getElementById('query-output').value = formattedResult; 
-  console.log(mergedResult);
+  ///  在responseFormattedData区域展示处理后的数据集
+  document.getElementById('responseFormattedData').value = JSON.stringify(mergedResult); 
   /// 绘制数据chart
   draw(mergedResult);
 }

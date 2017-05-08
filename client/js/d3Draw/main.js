@@ -1,11 +1,8 @@
 import {dateParse1} from './dataManipuForDraw/timeManipu.js';
 import dateNumManipu from './dataManipuForDraw/dateNumManipu.js';
 import {dataAdd_RateOf2Pro} from './dataManipuForDraw/dataAddCompuPro.js';
-//import drawFromData from './draw/drawFromData.js';
 import DrawLineTime from './draw/drawLineTime.js';
-//import data from '../getGaData/saveDealedData/doubleClickRequestsData.js';
 
-//var resultData = data;
 
 function draw(gaData) {
    /**
@@ -24,7 +21,6 @@ function draw(gaData) {
     */
     dataAdd_RateOf2Pro(gaData,'success','request','successRequestRate');
     dataAdd_RateOf2Pro(gaData,'fail','request','failRequestRate');
-  
     //DrawLineTime.init(gaData);//Class中的静态方法也是可以传参数的//
     DrawLineTime.drawDoubleClickRequest(gaData);
 }

@@ -1,0 +1,136 @@
+<section id="editRequest" class="hideSec">
+  <h2>Please edit the JSON of body of reportRequest of Ga API </h2>
+  <div>
+  <p>
+    The default data in following textarea is the standard format. What you should do is modifying it, and you can read the <a href = "https://developers.google.com/analytics/devguides/reporting/core/v4/rest/v4/reports/batchGet">DOCUMENT OF GA'S REPORTING API V4</a> 
+  </p>
+  </div>
+  <div>
+    <textarea cols="100" rows="10" id="reportRequest">
+        [
+          {
+            "viewId": "10995661",
+            
+            "dateRanges": [
+              {
+                "startDate": "7daysAgo",
+                "endDate": "yesterday"
+              }
+            ],
+          
+            "metrics": [
+              {
+                "expression": "ga:totalEvents"
+              }
+            ],
+            "dimensions":[
+              {
+                "name":"ga:date"
+              }
+            ],
+            "dimensionFilterClauses":[
+              {
+                "operator":"AND",
+                "filters": [ 
+                  {
+                    "dimensionName": "ga:eventCategory",
+                    "operator": "REGEXP",
+                    "expressions": ["\\([0-6]+\\)$"],
+                    "caseSensitive":true
+                  }, 
+                  {
+                    "dimensionName":"ga:eventAction",
+                    "operator":"EXACT",
+                    "expressions":["Request"],
+                    "caseSensitive":true
+                  } 
+                ]
+              }
+            ]
+          },
+          {
+            "viewId": "10995661",
+            "dateRanges":[
+              {
+                "startDate": "7daysAgo",
+                "endDate": "yesterday"
+              }
+            ],
+            "metrics": [
+              {
+                "expression": "ga:totalEvents"
+              }
+            ],
+            "dimensions":[
+              {
+                "name":"ga:date"
+              }
+            ],
+            "dimensionFilterClauses":[
+              {
+                "operator":"AND",
+                "filters": [ 
+                  {
+                    "dimensionName": "ga:eventCategory",
+                    "operator": "REGEXP",
+                    "expressions": ["\\([0-6]+\\)$"],
+                    "caseSensitive":true
+                  }, 
+                  {
+                    "dimensionName":"ga:eventAction",
+                    "operator":"BEGINS_WITH",
+                    "expressions":["Success"],
+                    "caseSensitive":true
+                  } 
+                ]
+              }
+            ]
+          },
+          {
+            "viewId": "10995661",
+            "dateRanges":[
+              {
+                "startDate": "7daysAgo",
+                "endDate": "yesterday"
+              }
+            ],
+            "metrics": [
+              {
+                "expression": "ga:totalEvents",
+                "formattingType":"INTEGER"
+              }
+            ],
+            "dimensions":[
+              {
+                "name":"ga:date"
+              }
+            ],
+            "dimensionFilterClauses":[
+              {
+                "operator":"AND",
+                "filters":[
+                  {
+                    "dimensionName":"ga:eventCategory",
+                    "operator":"REGEXP",
+                    "expressions":"\\([0-6]+\\)$",
+                    "caseSensitive":true
+                  },
+                  {
+                    "dimensionName":"ga:eventAction",
+                    "operator":"EXACT",
+                    "expressions":"Fail",
+                    "caseSensitive":true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+    </textarea>
+  </div>
+  <div>
+    <p>
+      After finishing the data editing, click the SignedIn Button again.
+    </p>
+  </div>
+</section>

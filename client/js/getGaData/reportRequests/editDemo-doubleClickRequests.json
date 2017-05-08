@@ -1,0 +1,119 @@
+        [
+          {
+            "viewId": "10995661",
+            
+            "dateRanges": [
+              {
+                "startDate": "7daysAgo",
+                "endDate": "yesterday"
+              }
+            ],
+          
+            "metrics": [
+              {
+                "expression": "ga:totalEvents"
+              }
+            ],
+            "dimensions":[
+              {
+                "name":"ga:date"
+              }
+            ],
+            "dimensionFilterClauses":[
+              {
+                "operator":"AND",
+                "filters": [ 
+                  {
+                    "dimensionName": "ga:eventCategory",
+                    "operator": "REGEXP",
+                    "expressions": ["\\([0-6]+\\)$"],
+                    "caseSensitive":true
+                  }, 
+                  {
+                    "dimensionName":"ga:eventAction",
+                    "operator":"EXACT",
+                    "expressions":["Request"],
+                    "caseSensitive":true
+                  } 
+                ]
+              }
+            ]
+          },
+          {
+            "viewId": "10995661",
+            "dateRanges":[
+              {
+                "startDate": "7daysAgo",
+                "endDate": "yesterday"
+              }
+            ],
+            "metrics": [
+              {
+                "expression": "ga:totalEvents"
+              }
+            ],
+            "dimensions":[
+              {
+                "name":"ga:date"
+              }
+            ],
+            "dimensionFilterClauses":[
+              {
+                "operator":"AND",
+                "filters": [ 
+                  {
+                    "dimensionName": "ga:eventCategory",
+                    "operator": "REGEXP",
+                    "expressions": ["\\([0-6]+\\)$"],
+                    "caseSensitive":true
+                  }, 
+                  {
+                    "dimensionName":"ga:eventAction",
+                    "operator":"BEGINS_WITH",
+                    "expressions":["Success"],
+                    "caseSensitive":true
+                  } 
+                ]
+              }
+            ]
+          },
+          {
+            "viewId": "10995661",
+            "dateRanges":[
+              {
+                "startDate": "7daysAgo",
+                "endDate": "yesterday"
+              }
+            ],
+            "metrics": [
+              {
+                "expression": "ga:totalEvents",
+                "formattingType":"INTEGER"
+              }
+            ],
+            "dimensions":[
+              {
+                "name":"ga:date"
+              }
+            ],
+            "dimensionFilterClauses":[
+              {
+                "operator":"AND",
+                "filters":[
+                  {
+                    "dimensionName":"ga:eventCategory",
+                    "operator":"REGEXP",
+                    "expressions":"\\([0-6]+\\)$",
+                    "caseSensitive":true
+                  },
+                  {
+                    "dimensionName":"ga:eventAction",
+                    "operator":"EXACT",
+                    "expressions":"Fail",
+                    "caseSensitive":true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
