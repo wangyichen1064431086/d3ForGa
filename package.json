@@ -18,6 +18,7 @@
   "homepage": "https://github.com/wangyichen1064431086/d3ForGa#readme",
   "devDependencies": {
     "browser-sync": "^2.18.8",
+    "del": "^2.2.2",
     "fs-jetpack": "^0.13.3",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-changed": "^2.0.0",

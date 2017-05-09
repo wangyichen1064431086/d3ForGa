@@ -128,6 +128,47 @@
         ]
     </textarea>
   </div>
+  <form>
+      <div class="o-forms">
+        <label for="o-forms-standard" class="o-forms__label">Start Date</label>
+        <small class="o-forms__additional-info">Write the startDate as the format 'xxxx-xx-xx'</small>
+        <input type="text" id="o-forms-standard" placeholder="2017-05-01" class="o-forms__text" required=""></input>
+      </div>
+      <div class="o-forms">
+        <label for="o-forms-standard" class="o-forms__label">End Date</label>
+        <small class="o-forms__additional-info">Write the startDate as the format 'xxxx-xx-xx'</small>
+        <input type="text" id="o-forms-standard" placeholder="2017-05-08" class="o-forms__text" required=""></input>
+      </div>
+
+
+      <div class="o-forms">
+        <label class="o-forms__label">demensionName</label>
+        <small class="o-forms__additional-info">Select the demension here</small>
+        <select id="o-forms__select-standard" class="o-forms__select">
+          <option value="option1" selected>ga:eventCategory</option>
+          <option value="option2">ga:eventAction</option>
+          <option value="option3">ga:eventLabel</option>
+        </select>
+      </div>
+      <div class="o-forms">
+        <label class="o-forms__label">operator</label>
+        <small class="o-forms__additional-info">Select the operator here</small>
+        <select id="o-forms__select-standard" class="o-forms__select">
+          <option value="option1" selected>EXACT</option>
+          <option value="option2">BEGINS_WITH</option>
+          <option value="option2">ENDS_WITH</option>
+          <option value="option3">REGEXP</option>
+        </select>
+      </div>
+      <div class="o-forms">
+        <label for="o-forms-standard" class="o-forms__label">expression</label>
+        <small class="o-forms__additional-info">Write the expression be matched with here</small>
+        <input type="text" id="o-forms-standard" placeholder="some expression" class="o-forms__text" required=""></input>
+      </div>
+
+  </form>
+
+
   <div>
     <p>
       After finishing the data editing, click the SignedIn Button again.

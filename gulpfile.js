@@ -6,6 +6,7 @@ const $ = require('gulp-load-plugins')();
 const rollup = require('rollup').rollup;
 const babel = require('rollup-plugin-babel');
 const nodeResolve = require('rollup-plugin-node-resolve');
+const del = require('del');
 
 var cache;
 const env = new nunjucks.Environment(
@@ -38,12 +39,6 @@ gulp.task('html',async function() {
   browserSync.reload('*.html');
 });
 
-gulp.task('helloGa',() => {
-  const destDir = '.tmp/ga';
-  return gulp.src('gaRelated/HelloAnalytics.html')
-    .pipe(gulp.dest(destDir))
-    .pipe(browserSync.stream({once:true}));
-});
 
 gulp.task('script',() => {
   // TODO:关于rollup需要再认真学习一下
@@ -92,7 +87,7 @@ gulp.task('style',() => {
     .pipe(browserSync.stream({once:true}));
 });
 
-gulp.task('serve',gulp.parallel('html','style','script','helloGa',function() {
+gulp.task('serve',gulp.parallel('html','style','script',function() {
   browserSync.init({
     server:{
       baseDir: ['.tmp', 'data'],
@@ -109,6 +104,12 @@ gulp.task('serve',gulp.parallel('html','style','script','helloGa',function() {
   gulp.watch(['views/**/*.html','data/dataForRender/*.json'],gulp.parallel('html'));
 }));
 
+gulp.task('del', (done) => {
+ del(['.tmp','dist','deploy']).then( paths => {
+    console.log('Deleted files:\n',paths.join('\n'));
+    done();
+  });
+});
 
 gulp.task('smoosh',() => {
   const destDir = 'dist';
@@ -152,4 +153,4 @@ gulp.task('copy',() => {
 });
 
 
-gulp.task('publish', gulp.series('html','style','script','smoosh','minify','copy'));
+gulp.task('publish', gulp.series('del','html','style','script','smoosh','minify','copy'));

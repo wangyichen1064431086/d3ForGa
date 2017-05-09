@@ -71,7 +71,7 @@ class DrawLineTime {
       this.drawPath(line, color, strokeWidth);
       const circles = this.drawCircleOfPath(xProName, yProName, color, circleR);
       this.addDataTagTrigger(circles, xProName, yProName);
-  }
+    }
     this.drawAxisText();
   }
 
@@ -170,6 +170,7 @@ class DrawLineTime {
      * @return: nothing,但是得到了this.chart
     */
     this.chart = d3.select(container)
+        .html(null)
         .attr("width", this.width + this.margin.left + this.margin.right)
         .attr("height", this.height + this.margin.top + this.margin.bottom)
       .append("g")  
