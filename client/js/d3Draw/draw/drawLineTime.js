@@ -44,6 +44,8 @@ class DrawLineTime {
     this.axisTextOption = axisTextOption;
 
     const xProName = xPro.name;
+    this.xProName = xProName;
+
     const yProNames = yPro.map(item => {
       //得到y轴数据在data中的属性名组成的数组，Eg:['clickFromRecommends','clickFromRelatives',...]
       return item['name'];
@@ -73,6 +75,7 @@ class DrawLineTime {
       this.addDataTagTrigger(circles, xProName, yProName);
     }
     this.drawAxisText();
+    this.drawSpecificLine(1,'blue',2);
   }
 
   setSize() {
@@ -220,6 +223,30 @@ class DrawLineTime {
       .style('stroke-width',strokeWidth); 
   }
 
+  drawSpecificLine(specificValue,strokeColor,strokeWidth) {
+    /**
+     * @param specificValue:Type Number, Eg 1
+     */
+    for(const item of this.data) {
+      item.specificValue = specificValue;
+    }
+   
+    const specificline = d3.line()
+    .x(d => this.scale.x(d[this.xProName]))
+    .y(d => this.scale.y(d['specificValue']));
+
+    this.chart.append('path')
+      .datum(this.data)
+      .attr('d', specificline)
+
+      .style('fill','none')
+      .style('storke-linejoin','round')
+      .style('stroke',strokeColor)
+      .style('stroke-width',0)
+      .transition(this.transition)//一前一后两种状态之间的过渡
+      .style('stroke-width',strokeWidth); 
+  }
+
   drawCircleOfPath(xProName, yProName, color, r) {
     /**
      * @dest: 绘制折线上的圆点
@@ -272,8 +299,8 @@ class DrawLineTime {
         console.log(d3.mouse(nodes[i]));
         const coordinates = d3.mouse(nodes[i]);//获取对应点相对于container的坐标
 
-        const datumInfo = `${yProName}:${d[yProName]}`;
-        
+        //const datumInfo = `${yProName}:${d[yProName]}`;
+        const datumInfo = `${d[yProName]}`;
         triggerText.attr('transform', `translate(${coordinates[0]-80},${coordinates[1]+25})`)
             .html(datumInfo)
             .style('display','block');

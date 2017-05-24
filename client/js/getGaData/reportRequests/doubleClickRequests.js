@@ -2,8 +2,8 @@ const VIEW_ID = '10995661';
 
 const dataRange1 = [
   {
-    startDate: '2017-04-07',
-    endDate: '2017-05-07',
+    startDate: '2017-04-27',
+    endDate: '2017-05-14',
   }
 ];
 
