@@ -38,3 +38,4 @@ jspm_packages
 .tmp
 dist
 deploy
+bower_components
